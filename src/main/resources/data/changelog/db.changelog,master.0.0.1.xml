@@ -1,0 +1,69 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xmlns:pro="http://www.liquibase.org/xml/ns/pro"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.1.xsd
+    http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd
+    http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-4.1.xsd ">
+    <changeSet id="1" author="Ibroxim">
+        <createTable tableName="users">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"></constraints>
+            </column>
+            <column name="full_name" type="varchar(255)">
+                <constraints nullable="false"></constraints>
+            </column>
+            <column name="username" type="varchar(255)">
+                <constraints nullable="false" unique="true"></constraints>
+            </column>
+            <column name="password" type="varchar(255)">
+                <constraints nullable="false"></constraints>
+            </column>
+            <column name="created_at" type="timestamp">
+                <constraints nullable="false"></constraints>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet id="2" author="Ibroxim">
+        <createTable tableName="chat">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"></constraints>
+            </column>
+            <column name="name" type="varchar(255)">
+                <constraints nullable="false" unique="true"></constraints>
+            </column>
+            <column name="created_at" type="timestamp">
+                <constraints nullable="false"></constraints>
+            </column>
+        </createTable>
+
+        <createTable tableName="chat_users">
+            <column name="chat_id" type="bigint">
+                <constraints foreignKeyName="FK123456" references="chat"></constraints>
+            </column>
+            <column name="users_id" type="bigint">
+                <constraints foreignKeyName="FK654321" references="users"></constraints>
+            </column>
+        </createTable>
+        <createTable tableName="message">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"></constraints>
+            </column>
+            <column name="author_id" type="bigint">
+                <constraints foreignKeyName="fk231456" references="users"></constraints>
+            </column>
+            <column name="text" type="varchar">
+
+            </column>
+            <column name="created_at" type="timestamp">
+                <constraints nullable="false"></constraints>
+            </column>
+            <column name="chat_id" type="bigint">
+                <constraints nullable="false" foreignKeyName="FK451236" references="chat"></constraints>
+            </column>
+        </createTable>
+
+    </changeSet>
+
+</databaseChangeLog>
